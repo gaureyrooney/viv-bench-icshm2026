@@ -1,0 +1,20 @@
+{
+  "run_name": "icgn_affineflow_fullframe",
+  "tracker": "icgn",
+  "compensator": "affine_flow",
+  "motion_model": "affine",
+  "filter": "bandpass",
+  "rmse_mm": 0.17431872009241028,
+  "normalized_rmse": 0.4650112446273756,
+  "mae_mm": 0.13932090456958302,
+  "phase_lag_deg_11.7hz": 5.832084120087257,
+  "coherence_11.7hz": 0.9984445696705702,
+  "amplitude_ratio_11.7hz": 0.9366493801141439,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 53.48412376749994,
+  "n_frames": 3033,
+  "lag_s": 0.05627128058580848,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 133.9594075679779,
+  "timestamp": "2026-08-18 06:52:52"
+}

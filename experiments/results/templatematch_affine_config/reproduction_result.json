@@ -1,0 +1,9 @@
+{
+  "lag_s": -0.1999999999999993,
+  "sign": 1.0,
+  "rmse_mm": 0.07039390325202721,
+  "corr": 0.9828981287087416,
+  "scale_to_lds_diagnostic": 0.943264747560426,
+  "rmse_scaled_diagnostic_mm": 0.0670246367583444,
+  "n_overlap": 3000
+}

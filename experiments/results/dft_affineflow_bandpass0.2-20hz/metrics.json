@@ -1,0 +1,18 @@
+{
+  "run_name": "dft_affineflow_bandpass0.2-20hz",
+  "tracker": "dft",
+  "compensator": "affine_flow",
+  "filter": "bandpass",
+  "rmse_mm": 0.34818436994058577,
+  "normalized_rmse": 0.9284326693246877,
+  "mae_mm": 0.27787746599264507,
+  "phase_lag_deg_11.7hz": -3.0715033619846155,
+  "coherence_11.7hz": 0.9963054521113475,
+  "amplitude_ratio_11.7hz": 0.9903109692361838,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 7.089146537667402,
+  "n_frames": 3033,
+  "lag_s": 0.1392303732275118,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 137.68037223815918
+}

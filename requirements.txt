@@ -1,0 +1,11 @@
+# Classical (CPU) tracking pipeline dependencies.
+# Verified working set, pinned from the project's "viv" conda env (Python 3.12.13).
+# Deep-learning trackers (CoTracker3/AllTracker/MegaFlow) will need an additional
+# torch/torchvision install (CUDA build recommended) - not required for Tier-1 methods.
+
+opencv-python==5.0.0
+scipy==1.18.0
+numpy==2.5.1
+pandas==3.0.5
+openpyxl==3.1.5
+vmdpy==0.2

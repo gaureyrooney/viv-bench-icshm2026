@@ -1,0 +1,22 @@
+{
+  "run_name": "icgn_differential_refresh",
+  "tracker": "icgn",
+  "compensator": "differential",
+  "affine_model": "",
+  "filter": "none",
+  "symmetric_lds_filter": false,
+  "rmse_mm": 0.333020601967775,
+  "normalized_rmse": 0.8883631346392344,
+  "mae_mm": 0.27734324561057183,
+  "phase_lag_deg_11.7hz": 5.951566564152442,
+  "coherence_11.7hz": 0.99842705079756,
+  "amplitude_ratio_11.7hz": 0.9395502077273465,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 11.135504575792565,
+  "n_frames": 3033,
+  "lag_s": 0.05627298986179177,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 0.00592803955078125,
+  "seed": 42,
+  "timestamp": "2026-08-18 15:14:09"
+}

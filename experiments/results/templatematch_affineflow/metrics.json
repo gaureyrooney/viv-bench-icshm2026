@@ -1,0 +1,18 @@
+{
+  "run_name": "templatematch_affineflow",
+  "tracker": "template_match",
+  "compensator": "affine_flow",
+  "filter": "none",
+  "rmse_mm": 0.19237100128864454,
+  "normalized_rmse": 0.5131673677504351,
+  "mae_mm": 0.15195608052891488,
+  "phase_lag_deg_11.7hz": 5.941303614086598,
+  "coherence_11.7hz": 0.9985803775385712,
+  "amplitude_ratio_11.7hz": 0.9415540951692295,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 48.66698377591918,
+  "n_frames": 3033,
+  "lag_s": 0.05611475910228782,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 46.69269347190857
+}

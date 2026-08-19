@@ -1,0 +1,20 @@
+{
+  "run_name": "icgn_differential",
+  "tracker": "icgn",
+  "compensator": "differential",
+  "motion_model": "",
+  "filter": "bandpass",
+  "rmse_mm": 0.14993667225575558,
+  "normalized_rmse": 0.39996988587326976,
+  "mae_mm": 0.11785193969917207,
+  "phase_lag_deg_11.7hz": 5.951583285141177,
+  "coherence_11.7hz": 0.9984267622860485,
+  "amplitude_ratio_11.7hz": 0.9349485085010945,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 59.99032298043292,
+  "n_frames": 3033,
+  "lag_s": 0.05627301658713045,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 66.2831130027771,
+  "timestamp": "2026-08-18 05:06:12"
+}

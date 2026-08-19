@@ -1,0 +1,20 @@
+{
+  "run_name": "templatematch_differential",
+  "tracker": "template_match",
+  "compensator": "differential",
+  "motion_model": "",
+  "filter": "bandpass",
+  "rmse_mm": 0.15012276200302904,
+  "normalized_rmse": 0.40046629741728607,
+  "mae_mm": 0.11798541631129543,
+  "phase_lag_deg_11.7hz": 5.926716644384798,
+  "coherence_11.7hz": 0.9982183617921042,
+  "amplitude_ratio_11.7hz": 0.9252631910272456,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 59.94066607813511,
+  "n_frames": 3033,
+  "lag_s": 0.05629389023643201,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 46.256036043167114,
+  "timestamp": "2026-08-18 05:22:41"
+}

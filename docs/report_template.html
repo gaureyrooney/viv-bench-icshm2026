@@ -1,0 +1,837 @@
+<title>Stay-Cable VIV Metrology</title>
+<style>
+  :root{
+    --paper:#fcfcfa; --surface:#f4f4f0; --sunk:#ecece6;
+    --ink:#14181d; --ink-2:#3a4149; --slate:#6b7480; --rule:#d9d9d2;
+    --vision:#0a5c99; --reference:#c8102e; --verified:#1b7f4b; --amber:#96681f;
+    --vision-wash:#0a5c9914; --verified-wash:#1b7f4b14; --reference-wash:#c8102e12; --amber-wash:#96681f14;
+    --plain-wash:#0a5c990d; --plain-rule:#0a5c9955;
+    --serif:Charter,"Bitstream Charter","Iowan Old Style",Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+    --measure:68ch; --wide:1080px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181d; --surface:#1b2027; --sunk:#222831;
+      --ink:#e8e8e2; --ink-2:#bcc2c9; --slate:#8d95a0; --rule:#2e343d;
+      --vision:#5aa9e0; --reference:#f0798c; --verified:#5cbe8a; --amber:#d9ac5e;
+      --vision-wash:#5aa9e01f; --verified-wash:#5cbe8a1f; --reference-wash:#f0798c1a; --amber-wash:#d9ac5e1a;
+      --plain-wash:#5aa9e014; --plain-rule:#5aa9e066;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181d; --surface:#1b2027; --sunk:#222831;
+    --ink:#e8e8e2; --ink-2:#bcc2c9; --slate:#8d95a0; --rule:#2e343d;
+    --vision:#5aa9e0; --reference:#f0798c; --verified:#5cbe8a; --amber:#d9ac5e;
+    --vision-wash:#5aa9e01f; --verified-wash:#5cbe8a1f; --reference-wash:#f0798c1a; --amber-wash:#d9ac5e1a;
+    --plain-wash:#5aa9e014; --plain-rule:#5aa9e066;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--paper); color:var(--ink); font-family:var(--serif);
+       font-size:17px; line-height:1.62; margin:0; padding:0 24px 96px;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--wide); margin:0 auto}
+  .col{max-width:var(--measure)}
+  p,ul,ol{margin:0 0 1.05em}
+  a{color:var(--vision)}
+  a:focus-visible{outline:2px solid var(--vision); outline-offset:3px}
+  code,.num{font-family:var(--mono); font-variant-numeric:tabular-nums}
+  code{font-size:.87em; background:var(--sunk); padding:.1em .34em; border-radius:3px}
+
+  header.mast{padding:72px 0 28px; border-bottom:2px solid var(--ink)}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+           text-transform:uppercase; color:var(--slate); margin:0 0 18px}
+  h1{font-weight:600; font-size:clamp(2.1rem,5vw,3.1rem); line-height:1.06;
+     letter-spacing:-.02em; margin:0 0 .5em; text-wrap:balance}
+  .standfirst{font-size:1.16rem; color:var(--ink-2); max-width:62ch; margin:0}
+  .byline{font-family:var(--mono); font-size:11.5px; color:var(--slate);
+          margin:26px 0 0; letter-spacing:.03em; line-height:1.8}
+
+  .metrics{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+           gap:1px; background:var(--rule); border:1px solid var(--rule); margin:38px 0 8px}
+  .metric{background:var(--surface); padding:18px 20px}
+  .metric .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.11em;
+             text-transform:uppercase; color:var(--slate); display:block; margin-bottom:9px}
+  .metric .v{font-family:var(--mono); font-size:1.62rem; font-variant-numeric:tabular-nums;
+             letter-spacing:-.02em; display:block; line-height:1}
+  .metric .u{font-size:.78rem; color:var(--slate); font-family:var(--serif)}
+  .metric.hero{background:var(--verified-wash)} .metric.hero .v{color:var(--verified)}
+  .metric.ref .v{color:var(--reference)}
+
+  section{padding:52px 0 0}
+  h2{font-size:1.62rem; font-weight:600; letter-spacing:-.015em; line-height:1.2;
+     margin:0 0 .2em; text-wrap:balance; display:flex; gap:.6em; align-items:baseline}
+  h2 .sn{font-family:var(--mono); font-size:.72em; color:var(--slate); font-weight:400}
+  .dek{color:var(--slate); font-size:1rem; margin:0 0 1.5em; max-width:62ch}
+  h3{font-size:1.1rem; font-weight:600; margin:2em 0 .5em; letter-spacing:-.01em}
+
+  aside.plain{border-left:3px solid var(--plain-rule); background:var(--plain-wash);
+              padding:15px 20px; margin:22px 0; font-size:.97rem; max-width:var(--measure)}
+  aside.plain .lab{font-family:var(--mono); font-size:10px; letter-spacing:.13em;
+                   text-transform:uppercase; color:var(--vision); display:block; margin-bottom:7px}
+  aside.plain p:last-child{margin-bottom:0}
+
+  ol.stages{list-style:none; padding:0; margin:0; counter-reset:st; border-left:2px solid var(--rule)}
+  ol.stages>li{counter-increment:st; position:relative; padding:0 0 26px 26px}
+  ol.stages>li::before{content:counter(st,decimal-leading-zero);
+     position:absolute; left:-2px; top:2px; transform:translateX(-50%);
+     font-family:var(--mono); font-size:10.5px; font-weight:600; color:var(--paper);
+     background:var(--ink); width:22px; height:22px; border-radius:50%;
+     display:grid; place-items:center}
+  ol.stages .st-h{font-weight:600; display:block; margin-bottom:.15em}
+  ol.stages .st-f{font-family:var(--mono); font-size:11.5px; color:var(--slate);
+                  display:block; margin-bottom:.4em}
+  ol.stages p{margin:0 0 .5em; color:var(--ink-2); font-size:.96rem}
+  ol.stages .why{font-size:.9rem; color:var(--slate)}
+
+  figure{margin:34px 0; background:var(--surface); border:1px solid var(--rule); padding:14px}
+  figure img{width:100%; height:auto; display:block; border-radius:2px}
+  figcaption{font-size:.86rem; color:var(--slate); margin-top:12px; line-height:1.5}
+  figcaption b{color:var(--ink-2); font-weight:600}
+
+  .tw{overflow-x:auto; margin:26px 0; border:1px solid var(--rule)}
+  table{border-collapse:collapse; width:100%; font-size:.88rem; background:var(--surface)}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--rule); vertical-align:top}
+  th{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+     color:var(--slate); font-weight:600; background:var(--sunk); white-space:nowrap}
+  td.n{font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tr.best{background:var(--verified-wash)} tr.best td{font-weight:600}
+  tr.refrow{background:var(--reference-wash)}
+  .good{color:var(--verified)} .bad{color:var(--reference)} .warn{color:var(--amber)}
+
+  .call{border-left:3px solid var(--vision); background:var(--vision-wash);
+        padding:16px 20px; margin:26px 0; font-size:.96rem; max-width:var(--measure)}
+  .call.bug{border-color:var(--reference); background:var(--reference-wash)}
+  .call.win{border-color:var(--verified); background:var(--verified-wash)}
+  .call.warn{border-color:var(--amber); background:var(--amber-wash)}
+  .call .lab{font-family:var(--mono); font-size:10.5px; letter-spacing:.11em;
+             text-transform:uppercase; display:block; margin-bottom:7px; color:var(--slate)}
+  .call p:last-child{margin-bottom:0}
+
+  .eq{font-family:var(--mono); font-size:.9rem; background:var(--sunk); padding:12px 16px;
+      margin:18px 0; overflow-x:auto; border-left:2px solid var(--rule); max-width:var(--measure)}
+
+  dl.gloss{margin:0; max-width:var(--measure)}
+  dl.gloss dt{font-weight:600; margin-top:1.1em; font-size:.98rem}
+  dl.gloss dd{margin:.15em 0 0; color:var(--ink-2); font-size:.94rem}
+
+  ol.refs{list-style:none; counter-reset:r; padding:0; font-size:.87rem; color:var(--ink-2);
+          max-width:var(--measure)}
+  ol.refs li{counter-increment:r; position:relative; padding:0 0 .9em 3.1em; line-height:1.5}
+  ol.refs li::before{content:"[" counter(r) "]"; position:absolute; left:0;
+     font-family:var(--mono); font-size:.86em; color:var(--slate)}
+  ol.refs .ttl{font-style:italic}
+  sup.c{font-family:var(--mono); font-size:.68em; color:var(--vision); padding-left:.1em}
+
+  footer{margin-top:64px; padding-top:22px; border-top:1px solid var(--rule);
+         font-family:var(--mono); font-size:11px; color:var(--slate); line-height:1.8}
+  @media (max-width:640px){ body{font-size:16px; padding:0 16px 64px} header.mast{padding-top:44px} }
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">ICSHM 2026 · Project 1 · Technical Report</p>
+  <h1>Measuring a 1.7-pixel vibration from a moving drone</h1>
+  <p class="standfirst">A complete UAV-video pipeline that recovers the vibration of a
+  wind-tunnel stay-cable model to <b>0.058 mm</b> — roughly one-fifteenth the width of a
+  human hair — together with the two measurement mistakes that hid a factor-of-two error
+  for most of the project's life.</p>
+  <p class="byline">
+    60 s clip · 3840×2160 at 50 fps · 3033 frames · laser displacement sensor at 10 kHz<br>
+    Written for two audiences: the shaded boxes explain each idea in plain language,
+    while the surrounding text carries the full technical detail.
+  </p>
+</header>
+
+<div class="metrics">
+  <div class="metric hero"><span class="k">Best accuracy</span><span class="v">0.0577</span><span class="u">mm · full 60 s</span></div>
+  <div class="metric"><span class="k">Held-out half</span><span class="v">0.0622</span><span class="u">mm · unseen data</span></div>
+  <div class="metric ref"><span class="k">Earlier config</span><span class="v">0.0704</span><span class="u">mm · template-match + affine</span></div>
+  <div class="metric"><span class="k">Vibration size</span><span class="v">0.376</span><span class="u">mm RMS · what is measured</span></div>
+  <div class="metric"><span class="k">Agreement</span><span class="v">0.999</span><span class="u">coherence at 11.7 Hz</span></div>
+</div>
+
+<section class="col">
+  <h2><span class="sn">§0</span> Summary</h2>
+
+  <aside class="plain">
+    <span class="lab">In plain terms</span>
+    <p>A steel cable in a wind tunnel shivers as air flows past it — the same effect that
+    makes power lines hum. We filmed a small checkerboard sticker on that cable with a
+    drone, and worked out how far the cable moved using only the video. A laser instrument
+    measured the same movement precisely, so we could check the answer.</p>
+    <p>The catch: the cable's shiver is tiny — about <b>1.7 pixels</b> in the video — while
+    the drone itself drifts around by <b>36 pixels</b>. It is like reading someone's
+    handwriting while both you and the paper are moving. Almost all the work goes into
+    cancelling the drone's own motion.</p>
+  </aside>
+
+  <p>The final pipeline reaches <b>0.0577 mm RMSE</b> against a signal of 0.376 mm RMS — an
+  18% improvement on the template-match + affine-flow configuration (0.0704 mm) that this
+  project started from. Three findings carried most of the result:</p>
+
+  <ol>
+    <li><b>Ego-motion compensation dominates everything.</b> Removing the camera's own
+    motion changes the error by a factor of 24. Which sub-pixel tracker is used changes it
+    by 9%. Effort spent on trackers had far less return than effort spent on compensation.</li>
+    <li><b>Two measurement bugs, not method limits, produced an apparent plateau.</b> An
+    asymmetric filter contributed a fixed 0.128 mm to every reported number, and a
+    sign-blind alignment search locked onto a decoy answer half a vibration cycle away.
+    Together they made five different trackers appear to converge on the same floor.</li>
+    <li><b>The remaining error was broadband measurement noise, not a modelling error.</b>
+    Measuring each stage's own noise showed 93% of the residual was unexplained by any
+    stage — the signature of a noise floor, which optimal spectral filtering then removed.</li>
+  </ol>
+</section>
+
+<section class="col">
+  <h2><span class="sn">§1</span> The measurement problem</h2>
+  <p class="dek">What is being measured, why it matters, and why the geometry makes it hard.</p>
+
+  <aside class="plain">
+    <span class="lab">In plain terms</span>
+    <p><b>Vortex-induced vibration</b> happens when wind blows past a cylinder — a bridge
+    cable, a chimney, a pipeline. The air sheds small swirls alternately off each side,
+    pushing the cable back and forth. If that rhythm matches the cable's natural frequency
+    it resonates and, over years, can fatigue the metal. Engineers therefore need to
+    measure how much real cables actually move.</p>
+    <p>Lasers do this accurately but must be mounted close to the structure. A drone can fly
+    to any cable on a bridge — if the video can be made accurate enough. That is what this
+    project tests.</p>
+  </aside>
+</section>
+
+<figure>
+  <img src="{{FIG1}}" alt="Frame 0 of the drone video: a wind-tunnel hall with a red stay cable running diagonally from upper left to lower right, a checkerboard target circled on the cable, and two small green background reference boxes marked on camera tripods.">
+  <figcaption><b>Figure 1 — The measurement scene.</b> Frame 0 at full 3840×2160
+  resolution. The checkerboard target sits on the red stay cable; vibration is measured
+  along the direction perpendicular to the cable axis. The two background reference regions
+  are small (67×67 px) and yield only 8 and 9 trackable corner features between them —
+  which turns out to be a deliberate virtue rather than a limitation (§7).</figcaption>
+</figure>
+
+<section class="col">
+  <p>The cable oscillates at about 11.7 Hz with roughly 0.376 mm RMS amplitude. At the
+  measured image scale of <span class="num">0.866</span> mm per pixel, that is a motion of
+  about <b>1.7 pixels</b>. Over the same 60 s the drone's apparent motion spans
+  <b>36 pixels</b>.</p>
+
+  <p>So the quantity of interest is about <b>5% of the target's apparent motion</b>; the
+  other 95% is camera movement that must be estimated and removed. Reaching 0.058 mm means
+  recovering the camera's motion to about <span class="num">0.07</span> px — roughly 0.2% of
+  its excursion. This ratio, far more than any algorithm choice, is what makes the problem
+  hard, and it is why the compensation stage dominates every result below.</p>
+
+  <div class="tw"><table>
+    <thead><tr><th>Channel</th><th>Rate</th><th>Length</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>UAV video</td><td class="n">50 fps</td><td class="n">3033 frames</td><td>3840×2160, rolling-shutter CMOS sensor</td></tr>
+      <tr><td>Laser displacement sensor</td><td class="n">10 000 Hz</td><td class="n">600 000 samples</td><td>single axis, 0.376 mm RMS</td></tr>
+      <tr><td>Checkerboard target</td><td>—</td><td class="n">65×62 px</td><td>55 mm physical size, giving 0.866 mm/px</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="call">
+    <span class="lab">Measured, not assumed</span>
+    <p>The laser reference is not the limiting factor. Its noise floor, read from the power
+    spectrum above 100 Hz (<span class="num">1.6×10⁻¹¹</span> mm²/Hz), is equivalent to
+    <span class="num">0.00002</span> mm across the 0.2–20 Hz comparison band — about
+    <b>3500× smaller</b> than the residual error. Every error discussed in this report
+    originates in the video pipeline.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§2</span> How the pipeline works</h2>
+    <p class="dek">Seven stages. Region selection is deliberately separated from tracking,
+    so algorithm work never depends on re-picking regions by hand.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>The pipeline answers one question per stage: <i>where is the sticker in this
+      frame?</i> → <i>how much of that movement was the drone?</i> → <i>subtract it</i> →
+      <i>convert pixels to millimetres</i> → <i>line the result up in time against the
+      laser</i> → <i>clean up the leftover noise</i>.</p>
+    </aside>
+  </div>
+
+  <ol class="stages col">
+    <li>
+      <span class="st-h">Region definition</span>
+      <span class="st-f">configs/rois.json → data/roi_io.py</span>
+      <p>The target point, the background reference boxes, the millimetres-per-pixel scale
+      and the cable-axis direction are stored as a small JSON file.</p>
+      <p class="why">Why it matters: this file is the only hand-off between choosing regions
+      and everything downstream, which is what allows every tracking method to be re-run and
+      compared without touching the regions.</p>
+    </li>
+    <li>
+      <span class="st-h">Streaming video decode</span>
+      <span class="st-f">data/video.py — load_roi_patches()</span>
+      <p>Small image patches around each region are cropped during a single decode pass
+      rather than loading whole frames into memory.</p>
+      <p class="why">Why it matters: holding the entire 4K clip in memory needed about
+      23 GB. Cropping during decode removes that limit entirely.</p>
+    </li>
+    <li>
+      <span class="st-h">Sub-pixel target tracking</span>
+      <span class="st-f">trackers/ — icgn · corner_klt · template_match · dft_reg · phase_based</span>
+      <p>Five interchangeable estimators behind one interface. IC-GN<sup class="c">[9]</sup>
+      is the digital-image-correlation standard; corner-KLT averages pyramidal Lucas–Kanade
+      optical flow<sup class="c">[10]</sup> over many corners; template matching uses
+      normalised cross-correlation with sub-pixel peak refinement; a Gabor quadrature-filter
+      tracker was added specifically because correlation-peak estimators suffer a documented
+      bias toward whole-pixel positions.</p>
+      <p class="why">Plain version: five different ways to answer "which pixel — and what
+      fraction of a pixel — is the sticker at now?"</p>
+    </li>
+    <li>
+      <span class="st-h">Ego-motion compensation</span>
+      <span class="st-f">motion/affine_flow.py · motion/differential_ref.py</span>
+      <p>The decisive stage. The affine-flow method detects corner features in the background
+      regions, tracks them across <em>full</em> frames, and fits one global
+      4-degree-of-freedom similarity transform per frame using RANSAC<sup class="c">[12]</sup>
+      to reject bad matches; the target position is then inverse-warped by that transform.
+      The differential method is a cheaper translation-only alternative that subtracts the
+      mean motion of two background points.</p>
+      <p class="why">Plain version: watch things known to be stationary, work out how the
+      camera moved, and undo exactly that motion on the target.</p>
+    </li>
+    <li>
+      <span class="st-h">Projection and scaling</span>
+      <span class="st-f">pipeline.py</span>
+      <p>The stabilised 2-D track is projected onto the direction perpendicular to the cable
+      axis, then multiplied by the millimetres-per-pixel scale.</p>
+      <p class="why">Why it matters: this collapses a 2-D track onto the same single axis the
+      laser measures, so the two can be compared directly.</p>
+    </li>
+    <li>
+      <span class="st-h">Temporal alignment</span>
+      <span class="st-f">dsp/alignment.py — align_signals()</span>
+      <p>The camera and laser clocks run independently, so the two records must be aligned in
+      time. A coarse stage correlates the signals' amplitude envelopes (robust but
+      low-precision), a fine stage refines to sub-sample precision, and <b>both signal
+      polarities are searched</b>.</p>
+      <p class="why">Omitting that last step was the single most expensive bug in the
+      project — see §4.</p>
+    </li>
+    <li>
+      <span class="st-h">Spectral denoising</span>
+      <span class="st-f">dsp/wiener_denoise.py</span>
+      <p>A graded per-frequency Wiener gain<sup class="c">[11]</sup> attenuates the frequency
+      bins dominated by measurement noise while leaving the resonance untouched. The noise
+      level is estimated from the video signal's own spectrum, so no reference sensor is
+      required.</p>
+      <p class="why">Plain version: the cable only really moves at a few known rhythms, so
+      anything measured at other rhythms is mostly noise and can be turned down.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§3</span> Ablation: what actually matters</h2>
+    <p class="dek">Every cell uses the full 60 s clip with both signals band-limited to
+    0.2–20 Hz — one evaluation convention throughout, so the numbers are mutually
+    comparable.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>An <b>ablation</b> switches each part of the system off, or swaps it for an
+      alternative, to see how much that part was contributing. Lower numbers are better;
+      they are the typical error in millimetres.</p>
+    </aside>
+  </div>
+
+  <figure>
+    <img src="{{FIG7}}" alt="Grouped bar chart on a logarithmic scale showing error for three trackers under three compensation methods. Bars without compensation sit near 1.7 mm, translation-only compensation between 0.15 and 0.40 mm, and full RANSAC compensation near 0.07 mm, below a dashed reference line.">
+    <figcaption><b>Figure 7 — Tracker and compensator ablation.</b> Logarithmic scale.
+    Compensation choice spans a factor of 24; tracker choice spans 9% within the best
+    compensator. The dashed line marks the earlier template-match + affine-flow
+    configuration, re-run unmodified.</figcaption>
+  </figure>
+
+  <div class="tw"><table>
+    <thead><tr><th>Target tracker</th><th>No compensation</th><th>Translation-only (2 points)</th><th>RANSAC similarity (full-frame)</th></tr></thead>
+    <tbody>
+      <tr><td>IC-GN</td><td class="n bad">1.7004</td><td class="n">0.1482</td><td class="n">0.0711</td></tr>
+      <tr class="best"><td>corner-KLT</td><td class="n bad">1.6987</td><td class="n warn">0.3953</td><td class="n good">0.0707</td></tr>
+      <tr><td>template matching</td><td class="n bad">1.7025</td><td class="n">0.1502</td><td class="n">0.0773</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="col">
+    <p>Three conclusions follow directly:</p>
+    <ul>
+      <li><b>Compensation is the pipeline.</b> Without it the error (1.70 mm) is 4.5× worse
+      than simply predicting no movement at all. With full-frame RANSAC compensation it is
+      0.071 mm — a 24× improvement, and 2–5× better than translation-only.</li>
+      <li><b>Tracker choice is second order.</b> Within the best compensator the three
+      trackers span 0.0707–0.0773 mm.</li>
+      <li><b>One interaction is real.</b> corner-KLT with translation-only compensation
+      (0.3953 mm) breaks the pattern. Corner-averaging degrades badly on the tiny 67 px
+      background patches that translation-only compensation must track, while being the best
+      tracker for the target itself. Tracker and compensator cannot be chosen
+      independently.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§4</span> Two measurement bugs</h2>
+    <p class="dek">For most of this project the pipeline appeared to plateau at 0.150 mm,
+    immovably, across five different trackers. Both causes lay in how results were
+    <em>measured</em>, not in the methods themselves.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>Both bugs were in the <i>scoring</i>, not the <i>measuring</i> — like a stopwatch
+      that always adds four seconds. Every runner looks equally slow, and no amount of
+      training improves the time, because the fault is in the clock.</p>
+    </aside>
+
+    <h3>Bug A — the asymmetric-filter artifact</h3>
+    <p>The long-standing default filtered the <em>video</em> signal to keep only 9–14 Hz but
+    compared it against the <em>unfiltered</em> laser signal. 12.2% of the laser signal's
+    energy lies outside that band, and the video signal had been filtered to contain exactly
+    zero there. Because the two frequency ranges are orthogonal, the reported error
+    decomposes exactly:</p>
+  </div>
+
+  <div class="eq col">RMSE² = (out-of-band laser energy)² + (true in-band error)²<br>0.1491² = 0.1283² + 0.0754²</div>
+
+  <figure>
+    <img src="{{FIG3}}" alt="Left: bar chart splitting a 0.149 mm reported error into a 0.128 mm metric artifact and a 0.075 mm true in-band error. Right: laser power spectrum with the 9 to 14 Hz band shaded as kept and surrounding bands shaded as discarded from the video signal only.">
+    <figcaption><b>Figure 3 — 87% of the headline number was unreachable.</b> The artifact
+    term is a constant that no tracker, compensator or amount of tuning could move — which
+    is precisely why five independent methods appeared to converge on the same floor. They
+    were all measuring the same constant. The harness now computes this term and prints a
+    warning whenever a filter is applied asymmetrically.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h3>Bug B — a sign-blind alignment search</h3>
+    <p>The cable-axis normal convention (normal forced to point "up") is the
+    <em>opposite polarity</em> to the laser sensor's sign convention. The alignment stage
+    searched only for time lag, never for polarity. For a narrowband 11.7 Hz signal the
+    correlation-versus-lag curve is itself roughly sinusoidal, so a polarity-flipped signal
+    correlates almost as well at a lag half a vibration period away (about 43 ms) as the
+    true signal does at the true lag. The search locked onto that decoy on every run.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>The video measured the movement upside-down relative to the laser. Because the
+      motion repeats every 85 milliseconds, an upside-down copy shifted by half a cycle looks
+      almost identical to the correct one — so the software confidently picked the wrong
+      match.</p>
+    </aside>
+  </div>
+
+  <figure>
+    <img src="{{FIG4}}" alt="Error against assumed time lag for both signal polarities. The positive-polarity curve has a shallow local minimum at 0.240 seconds around 0.26 mm; the negative-polarity curve reaches a much deeper minimum at 0.200 seconds around 0.146 mm.">
+    <figcaption><b>Figure 4 — The decoy optimum.</b> A half-period shift is a mild phase
+    error at 11.7 Hz but a severe one at 2–5 Hz, which is why the damage concentrated in the
+    low-frequency bands and masqueraded as a compensation problem. Note that the
+    envelope-based coarse stage added earlier could not catch this: the envelope of a signal
+    and of its negative are identical, so envelope correlation is polarity-blind by
+    construction.</figcaption>
+  </figure>
+
+  <div class="tw"><table>
+    <thead><tr><th>Quantity</th><th>Sign-blind search</th><th>With polarity search</th></tr></thead>
+    <tbody>
+      <tr><td>Chosen lag and polarity</td><td class="n">+0.240 s / +1</td><td class="n good">+0.200 s / −1</td></tr>
+      <tr><td>Error, 0.2–20 Hz</td><td class="n bad">0.2648</td><td class="n good">0.1456</td></tr>
+      <tr><td>Error, 2–5 Hz</td><td class="n bad">0.1841</td><td class="n good">0.0277</td></tr>
+      <tr><td>Error, 9–14 Hz</td><td class="n">0.0710</td><td class="n good">0.0352</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="call bug col">
+    <span class="lab">Consequence for earlier conclusions</span>
+    <p>Both bugs sat upstream of every experiment. The reported "0.150 mm floor across five
+    trackers" was about 87% a metric constant; a separately reported "background-tracking
+    non-determinism" turned out to be a <em>symptom</em> — 0.2 px of jitter was merely enough
+    to flip which decoy peak won the sign-blind search. After the fix, three independent
+    tracking runs agree on the lag to four decimal places. Several negative results had to be
+    re-run before they could be believed (§7).</p>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§5</span> Why every method plateaued at 0.070 mm</h2>
+    <p class="dek">Having been wrong once about a plateau, the second one was attacked by
+    measuring each candidate cause rather than reasoning about it.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>After the bugs were fixed, every method landed near 0.070 mm. Was that a real
+      physical limit, or another artificial one? Each possible culprit — the laser, the
+      tracker, the compensation, the scale calibration — was measured separately, the way an
+      accountant traces where money went.</p>
+    </aside>
+  </div>
+
+  <figure>
+    <img src="{{FIG5}}" alt="Left: logarithmic bars comparing laser signal strength against residual error across nine frequency bands, showing signal concentrated at 11 to 12.5 Hz while error is spread broadly. Right: noise budget bars showing observed residual 0.0707, compensation noise 0.0187, tracker noise 0.0095, negligible laser noise, and 0.0682 unexplained systematic.">
+    <figcaption><b>Figure 5 — The error is broadband; the signal is not.</b> (a) The laser
+    signal is concentrated at the resonance, while the residual error is spread almost
+    uniformly across frequency. (b) Each stage's own noise, measured by resampling that
+    stage's inputs.</figcaption>
+  </figure>
+
+  <div class="col">
+    <div class="tw"><table>
+      <thead><tr><th>Candidate cause</th><th>Measured by</th><th>Contribution</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>Laser sensor noise</td><td>power-spectrum floor above 100 Hz</td><td class="n">0.00002 mm</td><td class="good">ruled out</td></tr>
+        <tr><td>Target-tracker noise</td><td>disagreement between two trackers</td><td class="n">0.0095 mm</td><td class="good">~2% of variance</td></tr>
+        <tr><td>Compensation estimator noise</td><td>disjoint half-set refits of the transform</td><td class="n">0.0187 mm</td><td class="good">~7% of variance</td></tr>
+        <tr><td>Amplitude or scale error</td><td>gain fit in the high-signal resonance band</td><td class="n">k = 0.989</td><td class="good">explains 0%</td></tr>
+        <tr class="refrow"><td><b>Systematic remainder</b></td><td>—</td><td class="n">0.0682 mm</td><td class="bad">93% of variance</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>The compensation-noise figure comes from splitting the background features into two
+    disjoint halves, fitting an independent transform from each, compensating the same target
+    track with both, and differencing the results. Two independent half-set estimates differ
+    by √2 times the half-set noise, and a half-set fit is about √2 noisier than the full fit,
+    so <span class="num">σ_full ≈ rms(difference)/2</span>. This requires no ground truth — it
+    measures the estimator's own variance.</p>
+
+    <div class="call warn">
+      <span class="lab">So the plateau was not stage noise</span>
+      <p>93% of the residual variance is not random noise from any stage. It is broadband
+      video content in frequency bands where the cable barely responds — agreement with the
+      laser is only 0.60–0.77 even where both signals carry real energy. That is a
+      <em>measurement noise floor</em>, and, critically, it is exactly the right shape for
+      optimal spectral filtering rather than for further tuning of the tracker or the
+      transform.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§6</span> Breaking the plateau</h2>
+    <p class="dek">If the residual is broadband noise sitting beneath a narrowband signal, a
+    Wiener filter is the textbook-optimal response — and unlike a hard frequency cut it
+    cannot recreate the artifact of §4.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>Think of a graphic equaliser. Instead of muting whole frequency ranges — which
+      caused Bug A — each frequency is turned down <i>in proportion to how much of it is
+      noise</i>. Frequencies carrying real cable motion pass through untouched; frequencies
+      carrying only noise are turned right down. How much is noise is judged from the video
+      signal itself, so the laser is never needed to apply it.</p>
+    </aside>
+  </div>
+
+  <div class="eq col">G(f) = max(0, (P<sub>vv</sub>(f) − α·P<sub>nn</sub>) / P<sub>vv</sub>(f))</div>
+
+  <div class="col">
+    <p>The noise level <span class="num">P<sub>nn</sub></span> is estimated from the video
+    signal's own spectrum in 16–24 Hz, where the cable does not respond — so the method needs
+    <b>no ground truth</b> and is deployable without a reference sensor. Nothing is hard-cut:
+    bins dominated by signal pass essentially unchanged, while noise-dominated bins are
+    shrunk toward zero.</p>
+  </div>
+
+  <figure>
+    <img src="{{FIG6}}" alt="Left: error against the over-subtraction factor alpha for the training half and the held-out half, both showing a clear minimum near alpha equals 16 and rising again beyond it. Right: power spectra of the raw video signal, the Wiener-filtered signal, and the laser signal, showing preserved peaks near 4, 7.5 and 11.7 Hz with the noise floor between them suppressed.">
+    <figcaption><b>Figure 6 — A genuine interior optimum.</b> (a) α was selected on the first
+    30 s alone and applied unchanged to the held-out last 30 s. Performance improves up to
+    α≈16 then degrades again — a degenerate "keep only the resonance" filter would improve
+    monotonically instead, so the interior optimum is the safeguard that distinguishes real
+    denoising from a repeat of Bug A. (b) The filter preserves all three real structural modes
+    (about 4, 7.5 and 11.7 Hz) and removes the floor between and above them.</figcaption>
+  </figure>
+
+  <div class="tw"><table>
+    <thead><tr><th>Configuration</th><th>Train (first 30 s)</th><th>Held out (last 30 s)</th><th>Full 60 s</th></tr></thead>
+    <tbody>
+      <tr><td>corner-KLT + RANSAC similarity</td><td class="n">0.0661</td><td class="n">0.0751</td><td class="n">0.0707</td></tr>
+      <tr class="best"><td>+ Wiener denoising (α = 16)</td><td class="n">0.0559</td><td class="n good">0.0622</td><td class="n good">0.0577</td></tr>
+      <tr><td>IC-GN + RANSAC similarity + Wiener</td><td class="n">—</td><td class="n">0.0620</td><td class="n">0.0583</td></tr>
+      <tr class="refrow"><td>template matching + RANSAC similarity (earlier configuration)</td><td class="n">—</td><td class="n">—</td><td class="n">0.0704</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="call win col">
+    <span class="lab">Result</span>
+    <p><b>0.0577 mm on the full clip, 0.0622 mm on held-out data</b> — an 18% improvement on
+    the earlier configuration, with the single tuning parameter chosen on training data only
+    and the noise level estimated without ever touching the laser signal. Two independent
+    trackers agree (0.0577 and 0.0583 mm), so the gain is not tracker-specific.</p>
+  </div>
+
+  <figure>
+    <img src="{{FIG2}}" alt="Top: 60 seconds of video-derived and laser displacement traces overlaid, visually indistinguishable at this scale. Bottom: a 1.5 second detail showing individual samples of both traces tracking each other closely through several oscillation cycles.">
+    <figcaption><b>Figure 2 — Recovered displacement against the laser reference.</b> The
+    detail panel spans 1.5 s at 50 Hz. Phase lag at the resonance is −0.8°, coherence
+    0.999.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="col">
+    <h2><span class="sn">§7</span> What did not work</h2>
+    <p class="dek">Recorded because the negative results shaped the design, and because
+    several of them reversed once the measurement was fixed.</p>
+
+    <aside class="plain">
+      <span class="lab">In plain terms</span>
+      <p>Most ideas tried here made things worse. Two are worth understanding because they
+      are counter-intuitive: using <i>more</i> reference points made results worse, and
+      smoothing the estimated camera motion — which sounds obviously helpful — was actively
+      harmful.</p>
+    </aside>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Method tried</th><th>Result (mm)</th><th>Why — measured, not assumed</th></tr></thead>
+    <tbody>
+      <tr><td>Wider background regions<br><span class="num">92%×94%</span> of frame, ~1250 features</td><td class="n bad">0.1967</td>
+      <td>Parallax. Distant background moves only 30–50% as much as the target because it is
+      further from the camera. A 2-D transform has no depth parameter, so a fit spanning mixed
+      depths is correct at no depth at all. Published advice to widen the
+      baseline<sup class="c">[6][7]</sup> assumes rotation-dominated camera motion; this camera
+      translates enough for parallax to dominate.</td></tr>
+      <tr><td>Depth-matched wide regions</td><td class="n bad">0.5605</td>
+      <td>Depth matching is necessary but not sufficient — a region at the frame corner also
+      carries the worst uncorrected lens distortion.</td></tr>
+      <tr><td>Enlarging the existing regions in place</td><td class="n bad">0.5735</td>
+      <td>Same image position, same depth, 114 features instead of 17 — still 8× worse. Feature
+      <em>quality</em> is the binding constraint: the small regions are tightly cropped onto a
+      few high-contrast rigid corners, and enlarging admits weaker features that drag the
+      unweighted fit.</td></tr>
+      <tr><td>Temporal smoothing of the camera transform (EMA and Kalman)</td><td class="n bad">0.209–0.808</td>
+      <td>The background transform carries real content near the resonance; smoothing removes
+      it. The Kalman variant is the more dangerous of the two — its backward-smoothing pass
+      keeps phase flat while gutting amplitude, so monitoring phase alone cannot detect the
+      damage.</td></tr>
+      <tr><td>Variational mode decomposition cleanup<sup class="c">[8]</sup></td><td class="n bad">0.1378</td>
+      <td>Keeping only modes near 11.7 Hz discards real laser content. Its flattering symmetric
+      figure (0.0351) is the §4 artifact in a new costume.</td></tr>
+      <tr><td>Ensemble and median fusion of trackers</td><td class="n">0.0706</td>
+      <td>No gain, with a clear mechanism: tracker errors correlate at
+      <span class="num">+0.982</span> because they share a compensator, so the residual is
+      common-mode and averaging cannot cancel it.</td></tr>
+      <tr><td>6-DOF affine and 8-DOF homography transforms</td><td class="n bad">0.1931 / 0.1280</td>
+      <td>Extra degrees of freedom overfit two small clustered background regions. The 4-DOF
+      similarity model is the correct choice here, by a factor of 2.7.</td></tr>
+      <tr><td>Calibration rescaling</td><td class="n warn">0.0700</td>
+      <td>Reversed from "negligible" to a real 1–2% effect once the measurement was fixed. But
+      an earlier −3.9% estimate was regression-diluted: fitting gain across the whole band,
+      where out-of-band noise inflates the predictor variance, biases the slope toward zero.
+      Only the high-signal resonance-band estimate (−1.1%) and the independent geometric
+      measurement (−1.7%) are defensible.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="call col">
+    <span class="lab">Selection criteria that actually matter for background regions</span>
+    <p>In order: (1) depth matched to the target, (2) high-contrast rigid features, (3) tight
+    cropping that excludes weaker features. Image-plane spread and feature count — which the
+    literature emphasises — are <em>counterproductive</em> if pursued at the expense of those
+    three. The two-region set in use is near-optimal for this scene.</p>
+  </div>
+</section>
+
+<section class="col">
+  <h2><span class="sn">§8</span> Validation and reproducibility</h2>
+
+  <ul>
+    <li><b>Fixed-point regression check.</b> The frozen template-match + affine-flow
+    configuration is driven unmodified through
+    <code>experiments/run_templatematch_affine_config.py</code> and reproduces its recorded
+    0.07039 mm / 0.98290 correlation bit-for-bit. It is re-run after every change and has
+    never moved — which is precisely how both bugs in §4 were caught: this number stayed put
+    while others shifted.</li>
+    <li><b>Component ablation by substitution.</b> Swapping that configuration's target track
+    and camera transform against the current pipeline's, in a 2×2 grid, isolated the
+    difference unambiguously: the newer target tracking slightly outperformed it (0.0711
+    versus 0.0717 mm), and the entire remaining gap was compensation in the 0.2–1 Hz drift
+    band.</li>
+    <li><b>Synthetic ground truth before real data.</b> Every estimator was validated against
+    synthetic signals with known shift, polarity and amplitude before being trusted on real
+    data. The polarity fix, the transform decomposition (exact to 2×10⁻¹⁶) and the alignment
+    search were all verified this way.</li>
+    <li><b>Train/test split.</b> The one tuned parameter (α) was selected on the first 30 s
+    and reported on the held-out last 30 s.</li>
+    <li><b>Run provenance.</b> Every run writes its resolved arguments, git commit and dirty
+    state, package versions and random seed alongside its metrics, so any table row can be
+    replayed without remembering the flags.</li>
+    <li><b>One-command reproduction.</b> <code>python experiments/reproduce_all.py</code>
+    re-runs the entire ablation, the diagnostics, the regression check and the figure/report
+    build, then verifies every number in this report and prints a pass/fail table. The current
+    worst deviation across all 17 published values is <b>0.07%</b>.</li>
+  </ul>
+
+  <div class="call warn">
+    <span class="lab">Known limitations</span>
+    <p>Results come from a <b>single 60 s clip and a single camera pose</b>, so they
+    characterise this recording rather than the method's general accuracy. Rolling-shutter
+    distortion is unmodelled: the target sits at image row 888 while the reference regions sit
+    at rows 811 and 1303, a separation of about 490 rows that a single global transform per
+    frame cannot represent. Lens distortion is uncorrected — no camera intrinsics were
+    available. The target-patch margin is also tight: a 64 px template inside a 100 px patch is
+    valid only for target positions in [32, 68] px, and the measured range is
+    [32.5, 68.1] px.</p>
+  </div>
+
+  <h3>Recommended next steps</h3>
+  <ol>
+    <li><b>Quantify rolling shutter.</b> The largest identified unmodelled physical effect, and
+    the most likely contributor to the 93% systematic remainder. A row-dependent timing term
+    can be tested before adding model complexity.</li>
+    <li><b>Depth-weighted or split ego-motion estimation.</b> Estimate rotation from distant
+    features (which is depth-independent) and translation from depth-matched features. This is
+    the principled version of the region experiments that failed in §7.</li>
+    <li><b>Replicate across clips and camera poses</b> before quoting 0.058 mm as a general
+    accuracy figure.</li>
+    <li>Deep-learning trackers are <b>de-prioritised</b>: the ablation shows classical
+    sub-pixel target tracking already matches or beats the earlier configuration, so the
+    available headroom is not in the tracker.</li>
+  </ol>
+</section>
+
+<section class="col">
+  <h2><span class="sn">§9</span> Glossary</h2>
+  <p class="dek">Terms used above, in plain language.</p>
+
+  <dl class="gloss">
+    <dt>Vortex-induced vibration (VIV)</dt>
+    <dd>Wind flowing past a cylinder sheds swirls alternately from each side, pushing it back
+    and forth. If that rhythm matches the structure's natural frequency it resonates, which
+    over years can fatigue the material.</dd>
+
+    <dt>RMSE (root-mean-square error)</dt>
+    <dd>The typical size of the disagreement between the video measurement and the laser's, in
+    millimetres. Smaller is better. For scale, the vibration itself is 0.376 mm RMS.</dd>
+
+    <dt>Sub-pixel tracking</dt>
+    <dd>Estimating position to a fraction of a pixel by using the smooth variation of
+    brightness around a feature, rather than snapping to the nearest whole pixel.</dd>
+
+    <dt>Ego-motion compensation</dt>
+    <dd>Working out how the <i>camera</i> moved, using things known to be stationary, and
+    subtracting it so only the target's true motion remains.</dd>
+
+    <dt>Optical flow</dt>
+    <dd>Estimating how each small patch of the image moved from one frame to the next.</dd>
+
+    <dt>RANSAC</dt>
+    <dd>A way to fit a model when some measurements are badly wrong: it repeatedly fits to
+    random subsets and keeps the fit that most measurements agree with, so a few bad matches
+    cannot dominate.<sup class="c">[12]</sup></dd>
+
+    <dt>Similarity transform (4-DOF)</dt>
+    <dd>A description of camera movement allowing shift, rotation and uniform zoom — four
+    numbers. Richer models (6-DOF affine, 8-DOF homography) also allow stretch and perspective,
+    but performed worse here by overfitting.</dd>
+
+    <dt>Parallax</dt>
+    <dd>Nearby objects appear to move more than distant ones when the camera shifts sideways.
+    It is why background regions at the wrong distance actively harm the result.</dd>
+
+    <dt>Power spectrum</dt>
+    <dd>How much of a signal's energy sits at each frequency — the signal's "recipe" of
+    rhythms.</dd>
+
+    <dt>Coherence</dt>
+    <dd>How consistently two signals agree at a given frequency, from 0 (unrelated) to 1
+    (perfectly related). Here it is 0.999 at the vibration frequency.</dd>
+
+    <dt>Wiener filter</dt>
+    <dd>The mathematically optimal way to turn down noise when you know roughly how much noise
+    sits at each frequency — a graded equaliser rather than an on/off cut.<sup class="c">[11]</sup></dd>
+
+    <dt>Rolling shutter</dt>
+    <dd>Most video sensors expose the image one row at a time rather than all at once, so
+    different parts of a moving scene are captured at slightly different instants.</dd>
+
+    <dt>Held-out data</dt>
+    <dd>A portion of the recording deliberately not used while tuning, kept back to check that
+    the result is genuine rather than fitted to the data used for tuning.</dd>
+  </dl>
+</section>
+
+<section class="col">
+  <h2><span class="sn">§10</span> References</h2>
+  <ol class="refs">
+    <li>Sun, L. et al. <span class="ttl">A two-stage correction method for UAV
+    movement-induced errors in non-target computer vision-based displacement
+    measurement.</span> Mechanical Systems and Signal Processing, 2024.
+    <a href="https://www.sciencedirect.com/science/article/abs/pii/S088832702401029X">sciencedirect.com/science/article/abs/pii/S088832702401029X</a>
+    — describes the same two-stage architecture used here (similarity transform from
+    stationary reference points, then variational mode decomposition); reports 0.12–0.49 mm
+    mean error.</li>
+
+    <li><span class="ttl">Experimental accuracy evaluation of UAV-based homography for static
+    and dynamic displacement monitoring of structures.</span> Sensors, 2026.
+    <a href="https://doi.org/10.3390/s26051593">doi.org/10.3390/s26051593</a>
+    — reports vertical-displacement RMSE below 0.08 px, the same sub-pixel regime as this
+    work.</li>
+
+    <li>Vautherin, J. et al. <span class="ttl">A two-step approach for the correction of
+    rolling shutter distortion in UAV photogrammetry.</span> ISPRS Journal of Photogrammetry
+    and Remote Sensing, 2019.
+    <a href="https://www.sciencedirect.com/science/article/abs/pii/S0924271619302849">sciencedirect.com/science/article/abs/pii/S0924271619302849</a>
+    — basis for the rolling-shutter concern raised in §8.</li>
+
+    <li><span class="ttl">UAV-assisted vision-based vibration measurement via hybrid tracking
+    and coarse-to-fine ego-motion compensation.</span> Advanced Engineering Informatics, 2026.
+    <a href="https://www.sciencedirect.com/science/article/abs/pii/S1474034626002430">sciencedirect.com/science/article/abs/pii/S1474034626002430</a></li>
+
+    <li><span class="ttl">Enhanced vision-based structural displacement monitoring through deep
+    learning approaches.</span> Advanced Engineering Informatics, 2025.
+    <a href="https://www.sciencedirect.com/science/article/abs/pii/S0166361525001022">sciencedirect.com/science/article/abs/pii/S0166361525001022</a></li>
+
+    <li>Aqel, M. O. A. et al. <span class="ttl">Review of visual odometry: types, approaches,
+    challenges, and applications.</span> arXiv:1804.11142, 2018.
+    <a href="https://arxiv.org/pdf/1804.11142">arxiv.org/pdf/1804.11142</a>
+    — source of the field-of-view guidance that §7 shows does not transfer to
+    translation-dominated, parallax-heavy scenes.</li>
+
+    <li><span class="ttl">Egomotion estimation using background feature point matching in
+    OpenCV environment.</span> Springer, 2017.
+    <a href="https://link.springer.com/chapter/10.1007/978-981-10-4852-4_22">link.springer.com/chapter/10.1007/978-981-10-4852-4_22</a></li>
+
+    <li>Dragomiretskiy, K. and Zosso, D. <span class="ttl">Variational mode
+    decomposition.</span> IEEE Transactions on Signal Processing, 62(3):531–544, 2014.
+    — the decomposition tested and rejected in §7.</li>
+
+    <li>Baker, S. and Matthews, I. <span class="ttl">Lucas-Kanade 20 years on: a unifying
+    framework.</span> International Journal of Computer Vision, 56(3):221–255, 2004.
+    — the inverse-compositional Gauss–Newton formulation behind the IC-GN tracker.</li>
+
+    <li>Bouguet, J.-Y. <span class="ttl">Pyramidal implementation of the affine Lucas–Kanade
+    feature tracker.</span> Intel Corporation Microprocessor Research Labs, 2001.
+    — the pyramidal optical flow used for background features and by corner-KLT.</li>
+
+    <li>Boll, S. F. <span class="ttl">Suppression of acoustic noise in speech using spectral
+    subtraction.</span> IEEE Transactions on Acoustics, Speech and Signal Processing,
+    27(2):113–120, 1979. — the over-subtraction formulation adopted in §6.</li>
+
+    <li>Fischler, M. A. and Bolles, R. C. <span class="ttl">Random sample consensus: a paradigm
+    for model fitting with applications to image analysis and automated cartography.</span>
+    Communications of the ACM, 24(6):381–395, 1981. — robust transform fitting in the
+    compensation stage.</li>
+  </ol>
+</section>
+
+<footer>
+  <div>viv-bench — UAV-video VIV displacement measurement · ICSHM 2026 Project 1</div>
+  <div>Figures generated from saved run artefacts by experiments/make_report_figures.py; archival 300 dpi TIFF copies in docs/figures/tiff/</div>
+  <div>Reproduce every number in this report with: python experiments/reproduce_all.py</div>
+  <div>Generated from a single source in three formats — report.html, report.docx, report.md — by experiments/build_report.py</div>
+</footer>
+
+</div>

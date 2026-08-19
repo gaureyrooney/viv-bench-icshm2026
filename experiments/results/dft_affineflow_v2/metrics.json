@@ -1,0 +1,18 @@
+{
+  "run_name": "dft_affineflow_v2",
+  "tracker": "dft",
+  "compensator": "affine_flow",
+  "filter": "none",
+  "rmse_mm": 0.37575742942768803,
+  "normalized_rmse": 1.0019561569683952,
+  "mae_mm": 0.3000663609102162,
+  "phase_lag_deg_11.7hz": -3.069755811077899,
+  "coherence_11.7hz": 0.9963054798099076,
+  "amplitude_ratio_11.7hz": 0.9932012484126328,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": -0.26855446985194487,
+  "n_frames": 3033,
+  "lag_s": 0.13923079940172906,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 103.0955765247345
+}

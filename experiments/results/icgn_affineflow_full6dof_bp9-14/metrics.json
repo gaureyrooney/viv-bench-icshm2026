@@ -1,0 +1,22 @@
+{
+  "run_name": "icgn_affineflow_full6dof_bp9-14",
+  "tracker": "icgn",
+  "compensator": "affine_flow",
+  "affine_model": "full",
+  "filter": "bandpass",
+  "symmetric_lds_filter": false,
+  "rmse_mm": 0.1561235455479661,
+  "normalized_rmse": 0.41647394033418783,
+  "mae_mm": 0.12234052202376011,
+  "phase_lag_deg_11.7hz": 6.602765662328201,
+  "coherence_11.7hz": 0.9959216214479019,
+  "amplitude_ratio_11.7hz": 1.0043787788042131,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 58.33939396848251,
+  "n_frames": 3033,
+  "lag_s": 0.05631005601068198,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 122.80960512161255,
+  "seed": 42,
+  "timestamp": "2026-08-18 14:56:05"
+}

@@ -1,0 +1,18 @@
+{
+  "run_name": "dft_affineflow_smoke",
+  "tracker": "dft",
+  "compensator": "affine_flow",
+  "filter": "none",
+  "rmse_mm": 0.3848529731613689,
+  "normalized_rmse": 1.058172293882543,
+  "mae_mm": 0.31495808700881694,
+  "phase_lag_deg_11.7hz": 7.977578040611243,
+  "coherence_11.7hz": 1.0,
+  "amplitude_ratio_11.7hz": 1.1659054027178257,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": -2.695644264676633,
+  "n_frames": 300,
+  "lag_s": 0.056561119357430883,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 10.864582777023315
+}

@@ -1,0 +1,41 @@
+{
+  "resolved_args": {
+    "recipe": null,
+    "tracker": "icgn",
+    "compensator": "affine_flow",
+    "affine_model": "similarity",
+    "transform_smoothing": "ema",
+    "smoothing_alpha": 0.3,
+    "video": "D:\\PhD_studies\\competitions\\ICSHM competition\\dense\\data\\Video.MP4",
+    "lds": "D:\\PhD_studies\\competitions\\ICSHM competition\\dense\\data\\LDS data.xlsx",
+    "rois": null,
+    "roi_method": null,
+    "roi_source": null,
+    "max_frames": null,
+    "run_name": "postaudit_icgn_affineflow_ema0.3",
+    "out_dir": null,
+    "filter": "bandpass",
+    "symmetric_lds_filter": true,
+    "filter_cutoff_hz": 1.0,
+    "filter_band_hz": [
+      0.2,
+      20.0
+    ],
+    "from_cache": null,
+    "seed": 42,
+    "lds_alignment": "decimated"
+  },
+  "git": {
+    "commit": "2ca3f2e1b1807643a8ff9ab678e56bc310bf8949",
+    "dirty": true
+  },
+  "python_version": "3.12.13",
+  "package_versions": {
+    "cv2": "5.0.0",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "pandas": "3.0.5",
+    "openpyxl": "3.1.5"
+  },
+  "timestamp": "2026-08-18 22:52:12"
+}

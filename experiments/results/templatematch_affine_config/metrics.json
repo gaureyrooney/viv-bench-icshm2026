@@ -1,0 +1,21 @@
+{
+  "run_name": "templatematch_affine_config",
+  "tracker": "template_match_fullframe",
+  "compensator": "affine_flow_similarity",
+  "motion_model": "affine",
+  "filter": "bandpass_0.2_20hz_native",
+  "rmse_mm": 0.07039390325202721,
+  "normalized_rmse": null,
+  "mae_mm": null,
+  "phase_lag_deg_11.7hz": null,
+  "coherence_11.7hz": null,
+  "amplitude_ratio_11.7hz": null,
+  "baseline_rmse_mm": 0.3748,
+  "improvement_pct": 81.2182755464175,
+  "n_frames": 3033,
+  "lag_s": -0.2,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": null,
+  "timestamp": "2026-08-18 06:16:37",
+  "note": "full-frame NCC template matching + RANSAC 4-DOF similarity compensation, 0.2-20 Hz symmetric Butterworth; kept frozen as a regression fixed point"
+}

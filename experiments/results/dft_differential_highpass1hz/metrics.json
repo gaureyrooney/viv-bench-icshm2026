@@ -1,0 +1,18 @@
+{
+  "run_name": "dft_differential_highpass1hz",
+  "tracker": "dft",
+  "compensator": "differential",
+  "filter": "highpass",
+  "rmse_mm": 0.4298567482753632,
+  "normalized_rmse": 1.1459391944561488,
+  "mae_mm": 0.33089571429724157,
+  "phase_lag_deg_11.7hz": -5.877685225694035,
+  "coherence_11.7hz": 0.9541826037442367,
+  "amplitude_ratio_11.7hz": 0.2542377158319316,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": -14.704624321942262,
+  "n_frames": 3033,
+  "lag_s": 0.1813328603054234,
+  "mm_per_px": 0.34375,
+  "elapsed_s": 250.41560459136963
+}

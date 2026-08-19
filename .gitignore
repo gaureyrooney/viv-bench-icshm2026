@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Credentials and keys - never commit
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+*.p12
+.env
+sshkey*
+
+# Local machine data paths (copy configs/paths.example.json to create it)
+configs/paths.json
+
+# Large source media and data - referenced via paths.py, never committed
+*.mp4
+*.MP4
+*.mov
+*.avi
+*.xlsx
+*.rar
+*.zip
+
+# Images are ignored by default...
+*.png
+*.jpg
+*.jpeg
+# ...except the curated report figures, which the documentation depends on.
+!docs/figures/**
+# The archival 300 dpi TIFFs are 13 MB of binaries that
+# experiments/make_report_figures.py regenerates in about 20 s.
+docs/figures/tiff/
+
+# Transient duplicate written when report.docx is locked open in Word
+docs/report_new.docx
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

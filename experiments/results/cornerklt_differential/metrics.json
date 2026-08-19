@@ -1,0 +1,20 @@
+{
+  "run_name": "cornerklt_differential",
+  "tracker": "corner_klt",
+  "compensator": "differential",
+  "motion_model": "",
+  "filter": "bandpass",
+  "rmse_mm": 0.15802019045669374,
+  "normalized_rmse": 0.4215334153530273,
+  "mae_mm": 0.12255439340469758,
+  "phase_lag_deg_11.7hz": 5.778934206426313,
+  "coherence_11.7hz": 0.9976064312722523,
+  "amplitude_ratio_11.7hz": 0.9967312357810262,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 57.83328596250009,
+  "n_frames": 3033,
+  "lag_s": 0.05619619705366302,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 51.34864640235901,
+  "timestamp": "2026-08-18 05:21:23"
+}

@@ -1,0 +1,38 @@
+{
+  "resolved_args": {
+    "recipe": null,
+    "tracker": "icgn",
+    "compensator": "differential",
+    "affine_model": "similarity",
+    "video": "D:\\PhD_studies\\competitions\\ICSHM competition\\dense\\data\\Video.MP4",
+    "lds": "D:\\PhD_studies\\competitions\\ICSHM competition\\dense\\data\\LDS data.xlsx",
+    "rois": null,
+    "roi_method": null,
+    "roi_source": null,
+    "max_frames": null,
+    "run_name": "icgn_differential_refresh",
+    "out_dir": null,
+    "filter": "none",
+    "symmetric_lds_filter": false,
+    "filter_cutoff_hz": 1.0,
+    "filter_band_hz": [
+      8.0,
+      16.0
+    ],
+    "from_cache": "experiments/results/icgn_differential/trajectories.npz",
+    "seed": 42
+  },
+  "git": {
+    "commit": "2ca3f2e1b1807643a8ff9ab678e56bc310bf8949",
+    "dirty": true
+  },
+  "python_version": "3.12.13",
+  "package_versions": {
+    "cv2": "5.0.0",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "pandas": "3.0.5",
+    "openpyxl": "3.1.5"
+  },
+  "timestamp": "2026-08-18 15:14:09"
+}

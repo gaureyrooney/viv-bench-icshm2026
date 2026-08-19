@@ -1,0 +1,22 @@
+{
+  "run_name": "icgn_affineflow_bp9-14_symlds",
+  "tracker": "icgn",
+  "compensator": "affine_flow",
+  "affine_model": "similarity",
+  "filter": "bandpass",
+  "symmetric_lds_filter": true,
+  "rmse_mm": 0.07283072849388203,
+  "normalized_rmse": 0.2073121849533312,
+  "mae_mm": 0.058828258592612016,
+  "phase_lag_deg_11.7hz": 5.832078753247314,
+  "coherence_11.7hz": 0.9984445619769988,
+  "amplitude_ratio_11.7hz": 0.9350126826268262,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 80.56556891452456,
+  "n_frames": 3033,
+  "lag_s": 0.05627128058580848,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 129.0354664325714,
+  "seed": 42,
+  "timestamp": "2026-08-18 14:51:21"
+}

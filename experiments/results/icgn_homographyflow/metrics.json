@@ -1,0 +1,20 @@
+{
+  "run_name": "icgn_homographyflow",
+  "tracker": "icgn",
+  "compensator": "affine_flow",
+  "motion_model": "homography",
+  "filter": "bandpass",
+  "rmse_mm": 0.27881373380086444,
+  "normalized_rmse": 0.7437613200992673,
+  "mae_mm": 0.21417810286219088,
+  "phase_lag_deg_11.7hz": 6.647594215847098,
+  "coherence_11.7hz": 0.9963332799033785,
+  "amplitude_ratio_11.7hz": 0.9984732190063741,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 25.600273300957397,
+  "n_frames": 3033,
+  "lag_s": 0.0563448309698255,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 59.34253191947937,
+  "timestamp": "2026-08-18 04:59:25"
+}

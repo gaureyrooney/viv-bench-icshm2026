@@ -1,0 +1,20 @@
+{
+  "run_name": "gabor_differential",
+  "tracker": "gabor_phase",
+  "compensator": "differential",
+  "motion_model": "",
+  "filter": "bandpass",
+  "rmse_mm": 0.15344326240479678,
+  "normalized_rmse": 0.40932403813379187,
+  "mae_mm": 0.1208740772724106,
+  "phase_lag_deg_11.7hz": 6.750557480676562,
+  "coherence_11.7hz": 0.9984888988800268,
+  "amplitude_ratio_11.7hz": 0.7912663752767681,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 59.05461100822228,
+  "n_frames": 3033,
+  "lag_s": 0.05604368476553205,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 44.387685775756836,
+  "timestamp": "2026-08-18 05:18:22"
+}

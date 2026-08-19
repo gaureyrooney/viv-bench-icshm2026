@@ -1,0 +1,53 @@
+{
+  "video_path": "D:\\PhD_studies\\competitions\\ICSHM competition\\dense\\data\\Video.MP4",
+  "reference_frame_index": 0,
+  "target_point": [
+    1899.5,
+    888.0
+  ],
+  "bg_points": [
+    [
+      1387.5,
+      844.5
+    ],
+    [
+      2505.5,
+      1338.0
+    ]
+  ],
+  "bg_boxes": [
+    [
+      1354.0,
+      811.0,
+      67.0,
+      67.0
+    ],
+    [
+      2472.0,
+      1303.0,
+      67.0,
+      70.0
+    ]
+  ],
+  "calibration": {
+    "method": "manual_target_bbox",
+    "checkerboard_size_mm": 55.0,
+    "mm_per_px": 0.8661417322834646
+  },
+  "cable_axis": {
+    "point_a": [
+      1406.3999999999999,
+      688.8
+    ],
+    "point_b": [
+      2277.6,
+      1128.0
+    ],
+    "viv_direction": [
+      0.45016304879932384,
+      -0.8929463754871833
+    ],
+    "projection_angle_rad": 0.46694792705129334
+  },
+  "patch_size": 100
+}

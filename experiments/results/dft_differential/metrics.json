@@ -1,0 +1,17 @@
+{
+  "run_name": "dft_differential",
+  "tracker": "dft",
+  "compensator": "differential",
+  "rmse_mm": 0.6217465256697322,
+  "normalized_rmse": 1.6574910493797113,
+  "mae_mm": 0.4767965299127849,
+  "phase_lag_deg_11.7hz": -5.877673056154258,
+  "coherence_11.7hz": 0.9541826167876444,
+  "amplitude_ratio_11.7hz": 0.26617440582068963,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": -65.90922891533664,
+  "n_frames": 3033,
+  "lag_s": 0.1813328603054234,
+  "mm_per_px": 0.34375,
+  "elapsed_s": 239.99673986434937
+}

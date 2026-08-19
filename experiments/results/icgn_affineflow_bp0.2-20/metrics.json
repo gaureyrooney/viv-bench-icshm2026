@@ -1,0 +1,19 @@
+{
+  "run_name": "icgn_affineflow_bp0.2-20",
+  "tracker": "icgn",
+  "compensator": "affine_flow",
+  "filter": "bandpass",
+  "rmse_mm": 0.18080503003798473,
+  "normalized_rmse": 0.4823140739461747,
+  "mae_mm": 0.14281148702984464,
+  "phase_lag_deg_11.7hz": 5.850020891687992,
+  "coherence_11.7hz": 0.9984646953958839,
+  "amplitude_ratio_11.7hz": 0.9406470399709059,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": 51.75329192985204,
+  "n_frames": 3033,
+  "lag_s": 0.05628705930785904,
+  "mm_per_px": 0.8661417322834646,
+  "elapsed_s": 54.05651307106018,
+  "timestamp": "2026-08-18 04:29:29"
+}

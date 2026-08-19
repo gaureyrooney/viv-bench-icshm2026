@@ -1,0 +1,17 @@
+{
+  "run_name": "dft_differential_300smoke",
+  "tracker": "dft",
+  "compensator": "differential",
+  "rmse_mm": 0.5692438581378025,
+  "normalized_rmse": 1.5753907250632944,
+  "mae_mm": 0.4607169438678249,
+  "phase_lag_deg_11.7hz": -49.85391020570452,
+  "coherence_11.7hz": 1.0,
+  "amplitude_ratio_11.7hz": 0.1349801443646571,
+  "baseline_rmse_mm": 0.3747510188158424,
+  "improvement_pct": -51.899215627626226,
+  "n_frames": 300,
+  "lag_s": 0.96,
+  "mm_per_px": 0.34375,
+  "elapsed_s": 26.276373147964478
+}

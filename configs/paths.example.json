@@ -1,0 +1,7 @@
+{
+  "_comment": "Copy this file to configs/paths.json and set the paths for your machine. configs/paths.json is git-ignored. Alternatively set VIVBENCH_VIDEO / VIVBENCH_LDS / VIVBENCH_TM_AFFINE_SCRIPT / VIVBENCH_TM_AFFINE_CONFIG as environment variables.",
+  "video": "C:/path/to/Video.MP4",
+  "lds": "C:/path/to/LDS data.xlsx",
+  "templatematch_affine_script": "C:/path/to/icshm2026_project1_templatematch_affine_config.py",
+  "templatematch_affine_config_json": "C:/path/to/templatematch_affine_config_json.json"
+}
